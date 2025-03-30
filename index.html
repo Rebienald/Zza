@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For My Beloved Mahal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap" as="style">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap">
+    <!-- Load animate.css only when needed -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" media="print" onload="this.media='all'">
     <style>
         :root {
             --primary-color: #c17a74;
@@ -28,11 +31,11 @@
             text-align: center;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 20% 30%, rgba(248,246,233,0.9) 0%, rgba(220,210,190,0.7) 100%),
-                linear-gradient(135deg, rgba(255,245,240,0.8) 0%, rgba(255,240,245,0.8) 100%);
+                radial-gradient(circle at 20% 30%, rgba(248,246,233,0.9) 0%, rgba(220,210,190,0.7) 100%);
             position: relative;
         }
 
+        /* Simplified background pattern */
         body::before {
             content: "";
             position: fixed;
@@ -40,99 +43,53 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%23e8a0a0" opacity="0.2" d="M30,50 Q50,30 70,50 Q50,70 30,50 Z"/></svg>'),
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><path fill="%23c17a74" opacity="0.15" d="M20,30 Q30,20 40,30 Q30,40 20,30 Z"/></svg>');
-            background-size: 100px, 60px;
-            background-position: 0 0, 50px 50px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%23e8a0a0" opacity="0.2" d="M30,50 Q50,30 70,50 Q50,70 30,50 Z"/></svg>');
+            background-size: 100px;
             opacity: 0.3;
             z-index: -1;
             pointer-events: none;
-            animation: bgMove 100s linear infinite;
+            will-change: transform;
+            transform: translateZ(0);
         }
 
-        @keyframes bgMove {
-            0% { background-position: 0 0, 50px 50px; }
-            100% { background-position: 1000px 1000px, 1050px 1050px; }
-        }
+        /* Removed complex animation for background */
 
         .container {
             max-width: 900px;
             padding: 50px;
-            background: linear-gradient(145deg, rgba(255,253,245,0.95) 0%, rgba(255,250,240,0.98) 100%);
+            background: rgba(255,253,245,0.95);
             border-radius: 25px;
-            box-shadow: 
-                0 20px 50px rgba(0, 0, 0, 0.15), 
-                0 0 0 15px rgba(248, 246, 233, 0.5),
-                0 0 0 25px rgba(220, 210, 190, 0.3),
-                inset 0 0 50px rgba(255, 255, 255, 0.8);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
             border: 1px solid #e8e4d5;
             position: relative;
             overflow: hidden;
-            transform-style: preserve-3d;
-            transition: transform 0.5s ease;
-            backdrop-filter: blur(2px);
+            /* Removed transform-style for better performance */
+            will-change: transform;
+            transform: translateZ(0);
         }
 
+        /* Simplified hover effect */
         .container:hover {
-            transform: translateY(-5px) rotateX(1deg) rotateY(1deg);
-            box-shadow: 
-                0 25px 60px rgba(0, 0, 0, 0.2), 
-                0 0 0 15px rgba(248, 246, 233, 0.5),
-                0 0 0 25px rgba(220, 210, 190, 0.3),
-                inset 0 0 80px rgba(255, 220, 220, 0.6);
+            transform: translateY(-5px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
         }
 
-        .container::before {
-            content: "";
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            border: 2px dashed rgba(193, 122, 116, 0.3);
-            border-radius: 35px;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .container::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 30%, transparent 10%, rgba(255,255,255,0.3) 20%, transparent 30%),
-                radial-gradient(circle at 80% 70%, transparent 10%, rgba(255,255,255,0.3) 20%, transparent 30%);
-            background-size: 300% 300%;
-            animation: shimmer 15s infinite linear;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        @keyframes shimmer {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 100% 100%; }
-        }
+        /* Removed redundant container decorations */
 
         h1 {
             color: var(--primary-color);
             font-family: 'Dancing Script', cursive;
             font-size: 4.5rem;
             margin-bottom: 40px;
-            text-shadow: 
-                3px 3px 5px rgba(0,0,0,0.1),
-                0 0 10px rgba(200, 120, 120, 0.3);
+            text-shadow: 3px 3px 5px rgba(0,0,0,0.1);
             position: relative;
             display: inline-block;
-            animation: pulse 2s infinite alternate;
         }
 
+        /* Simplified animations */
         @keyframes pulse {
             0% { transform: scale(1); }
-            100% { transform: scale(1.05); }
+            100% { transform: scale(1.03); }
         }
 
         h1::after {
@@ -144,13 +101,9 @@
             width: 150px;
             height: 3px;
             background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
-            animation: linePulse 3s infinite;
         }
 
-        @keyframes linePulse {
-            0%, 100% { width: 150px; }
-            50% { width: 200px; }
-        }
+        /* Removed unnecessary animation */
 
         .message-container {
             position: relative;
@@ -158,20 +111,14 @@
             background-color: rgba(255, 255, 255, 0.7);
             border-radius: 15px;
             margin: 40px 0;
-            box-shadow: 
-                inset 0 0 15px rgba(0,0,0,0.05),
-                0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             border: 1px solid rgba(193, 122, 116, 0.2);
-            transition: all 0.5s ease;
-            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .message-container:hover {
             transform: translateY(-3px);
-            box-shadow: 
-                inset 0 0 20px rgba(193, 122, 116, 0.1),
-                0 8px 25px rgba(0,0,0,0.1);
-            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         }
 
         .message-container::before {
@@ -211,97 +158,80 @@
             margin: 0 auto 40px;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 
-                0 15px 40px rgba(0,0,0,0.2),
-                0 0 0 10px white,
-                0 0 0 12px rgba(193, 122, 116, 0.3);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2), 0 0 0 10px white;
             position: relative;
             transform: rotate(-2deg);
-            transition: all 0.5s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             z-index: 1;
+            will-change: transform;
         }
 
         .photo-frame:hover {
             transform: rotate(0deg) scale(1.05);
-            box-shadow: 
-                0 20px 50px rgba(0,0,0,0.3),
-                0 0 0 10px white,
-                0 0 0 12px rgba(193, 122, 116, 0.5);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3), 0 0 0 10px white;
         }
 
-        .photo-frame::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(248,246,233,0.1) 0%, rgba(193,122,116,0.1) 100%);
-            z-index: 1;
-        }
-
-        .photo-frame::after {
-            content: "";
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            height: 20px;
-            background: rgba(0,0,0,0.1);
-            filter: blur(10px);
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .photo-frame:hover::after {
-            opacity: 0.6;
-        }
+        /* Simplified photo frame effects */
 
         .photo-frame img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: all 0.5s ease;
+            transition: transform 0.3s ease;
+            will-change: transform;
         }
 
         .photo-frame:hover img {
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
         .signature {
             font-family: 'Dancing Script', cursive;
             font-size: 2.8rem;
             color: var(--primary-color);
-            margin-top: 40px;
             text-shadow: 2px 2px 3px rgba(0,0,0,0.1);
             position: relative;
             display: inline-block;
         }
 
-        .signature::before {
+        .signature::before, .signature::after {
             content: "";
             position: absolute;
             top: 50%;
-            left: -40px;
             width: 30px;
             height: 2px;
             background: var(--primary-color);
             opacity: 0.5;
+        }
+
+        .signature::before {
+            left: -40px;
         }
 
         .signature::after {
+            right: -40px;
+        }
+
+        .signature-container {
+            margin-top: 20px;
+            padding-top: 20px;
+            position: relative;
+            text-align: center;
+        }
+
+        .signature-container::before {
             content: "";
             position: absolute;
-            top: 50%;
-            right: -40px;
-            width: 30px;
-            height: 2px;
-            background: var(--primary-color);
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
             opacity: 0.5;
         }
 
+        /* Heart animation optimization */
         .floating-hearts {
             position: absolute;
             width: 100%;
@@ -317,9 +247,8 @@
             position: absolute;
             color: var(--secondary-color);
             font-size: 1.5rem;
-            animation: float 6s ease-in-out infinite;
             opacity: 0;
-            filter: drop-shadow(0 0 5px rgba(200, 100, 100, 0.5));
+            will-change: transform, opacity;
         }
 
         @keyframes float {
@@ -329,20 +258,19 @@
             100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
         }
 
+        /* Simplified sparkle effect */
         .sparkle {
             position: absolute;
             width: 8px;
             height: 8px;
             background-color: var(--accent-color);
             border-radius: 50%;
-            animation: sparkle 1.5s ease-out infinite;
-            pointer-events: none;
             filter: drop-shadow(0 0 3px gold);
+            will-change: transform, opacity;
         }
 
         @keyframes sparkle {
             0% { transform: scale(0); opacity: 1; }
-            50% { opacity: 0.8; }
             100% { transform: scale(5); opacity: 0; }
         }
 
@@ -396,9 +324,9 @@
             transform: rotate(45deg);
             font-weight: bold;
             text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-            animation: ribbonShake 2s infinite;
         }
 
+        /* Simplified ribbon animation */
         @keyframes ribbonShake {
             0%, 100% { transform: rotate(45deg) translateX(0); }
             50% { transform: rotate(45deg) translateX(5px); }
@@ -412,11 +340,9 @@
             font-size: 1.3rem;
             border-radius: 50px;
             cursor: pointer;
-            margin-top: 30px;
-            box-shadow: 
-                0 10px 20px rgba(193, 122, 116, 0.3),
-                0 0 0 3px rgba(255, 255, 255, 0.5);
-            transition: all 0.3s ease;
+            margin: 30px auto 20px;
+            box-shadow: 0 10px 20px rgba(193, 122, 116, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
             font-family: 'Montserrat', sans-serif;
             font-weight: 600;
             text-transform: uppercase;
@@ -424,13 +350,14 @@
             position: relative;
             overflow: hidden;
             text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            display: block;
+            width: fit-content;
+            will-change: transform;
         }
 
         .btn-love:hover {
             transform: translateY(-5px);
-            box-shadow: 
-                0 15px 25px rgba(193, 122, 116, 0.4),
-                0 0 0 3px rgba(255, 255, 255, 0.7);
+            box-shadow: 0 15px 25px rgba(193, 122, 116, 0.4);
             background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
         }
 
@@ -438,52 +365,10 @@
             transform: translateY(1px);
         }
 
-        .btn-love::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: 0.5s;
-        }
-
-        .btn-love:hover::before {
-            left: 100%;
-        }
-
-        .btn-love::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 5px;
-            height: 5px;
-            background: rgba(255, 255, 255, 0.5);
-            opacity: 0;
-            border-radius: 100%;
-            transform: scale(1, 1) translate(-50%);
-            transform-origin: 50% 50%;
-        }
-
-        .btn-love:focus:not(:active)::after {
-            animation: ripple 1s ease-out;
-        }
-
-        @keyframes ripple {
-            0% {
-                transform: scale(0, 0);
-                opacity: 0.5;
-            }
-            100% {
-                transform: scale(20, 20);
-                opacity: 0;
-            }
-        }
+        /* Simplified button effects */
 
         .envelope {
-            position: absolute;
+            position: fixed;
             width: 100%;
             height: 100%;
             top: 0;
@@ -495,12 +380,14 @@
             align-items: center;
             background: rgba(0,0,0,0.7);
             opacity: 0;
-            transition: opacity 1s ease;
+            transition: opacity 0.5s ease;
+            visibility: hidden;
         }
 
         .envelope.active {
             opacity: 1;
             pointer-events: auto;
+            visibility: visible;
         }
 
         .envelope-content {
@@ -512,6 +399,7 @@
             transform: scale(0.5);
             transition: transform 0.5s ease;
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            will-change: transform;
         }
 
         .envelope.active .envelope-content {
@@ -544,9 +432,8 @@
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             z-index: 1000;
-            transition: all 0.3s ease;
-        }p{
-            text-align: justify!important;
+            transition: transform 0.3s ease, background 0.3s ease;
+            will-change: transform;
         }
 
         .music-control:hover {
@@ -554,15 +441,22 @@
             background: var(--secondary-color);
         }
 
+        /* Simplified confetti animation */
         .confetti {
             position: absolute;
             width: 10px;
             height: 10px;
-            background-color: var(--accent-color);
             opacity: 0;
             z-index: 100;
+            will-change: transform, opacity;
         }
 
+        @keyframes confettiFall {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) translateX(var(--end-x)) rotate(var(--end-rotate)); opacity: 0; }
+        }
+
+        /* Responsive improvements */
         @media (max-width: 768px) {
             .container {
                 padding: 30px;
@@ -587,6 +481,60 @@
                 font-size: 1.1rem;
             }
         }
+
+        /* Add animation classes we need from animate.css */
+        .animate__animated {
+            animation-duration: 1s;
+            animation-fill-mode: both;
+        }
+        
+        .animate__fadeIn {
+            animation-name: fadeIn;
+        }
+        
+        .animate__fadeInDown {
+            animation-name: fadeInDown;
+        }
+        
+        .animate__fadeInUp {
+            animation-name: fadeInUp;
+        }
+        
+        .animate__pulse {
+            animation-name: pulse;
+            animation-timing-function: ease-in-out;
+        }
+        
+        .animate__infinite {
+            animation-iteration-count: infinite;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translate3d(0, -100%, 0);
+            }
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translate3d(0, 100%, 0);
+            }
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
     </style>
 </head>
 <body>
@@ -606,7 +554,7 @@
         <h1 class="animate__animated animate__fadeInDown">Happy Birthday, Mahal!</h1>
         
         <div class="photo-frame">
-            <img src="USS.jpg" alt="Our Beautiful Memory">
+            <img src="USS.jpg" alt="Our Beautiful Memory" loading="lazy">
         </div>
         
         <div class="message-container animate__animated animate__fadeInUp">
@@ -652,95 +600,100 @@
         </div>
     </div>
 
-    <audio id="bgMusic" loop>
+    <!-- Audio preload -->
+    <audio id="bgMusic" preload="metadata" loop>
         <source src="lover.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        // Create floating hearts
+        // Use a limited number of hearts for better performance
+        const MAX_HEARTS = 20;
+        const MAX_SPARKLES = 10;
+        
+        // Create floating hearts - optimized
         function createHearts() {
             const container = document.getElementById('heartsContainer');
-            const heartCount = 30;
-            const heartTypes = ['❤', '🧡', '💛', '💚', '💙', '💜', '🤎', '🖤', '🤍'];
+            const heartCount = Math.min(15, MAX_HEARTS - container.children.length);
+            const heartTypes = ['❤', '🧡', '💗'];
+            
+            if (heartCount <= 0) return;
             
             for (let i = 0; i < heartCount; i++) {
                 const heart = document.createElement('div');
                 heart.classList.add('heart');
                 heart.innerHTML = heartTypes[Math.floor(Math.random() * heartTypes.length)];
                 heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.top = Math.random() * 100 + 'vh';
-                heart.style.fontSize = (Math.random() * 25 + 15) + 'px';
-                heart.style.animationDuration = (Math.random() * 10 + 5) + 's';
-                heart.style.animationDelay = (Math.random() * 5) + 's';
+                heart.style.animation = `float ${Math.random() * 5 + 5}s ease-in-out forwards`;
                 container.appendChild(heart);
+                
+                // Clean up hearts after animation
+                setTimeout(() => {
+                    if (heart.parentNode) heart.parentNode.removeChild(heart);
+                }, 10000);
             }
         }
         
-        // Create sparkles on click
+        // Create sparkles on click - optimized
         function createSparkles(e) {
-            for (let i = 0; i < 15; i++) {
+            const sparkleCount = Math.min(8, MAX_SPARKLES);
+            
+            for (let i = 0; i < sparkleCount; i++) {
                 const sparkle = document.createElement('div');
                 sparkle.classList.add('sparkle');
                 sparkle.style.left = e.clientX + (Math.random() * 40 - 20) + 'px';
                 sparkle.style.top = e.clientY + (Math.random() * 40 - 20) + 'px';
-                sparkle.style.animationDelay = (i * 0.1) + 's';
+                sparkle.style.animation = `sparkle 1.5s ease-out forwards`;
                 sparkle.style.backgroundColor = `hsl(${Math.random() * 60 + 30}, 100%, 50%)`;
                 document.body.appendChild(sparkle);
                 
                 // Remove sparkle after animation
                 setTimeout(() => {
-                    sparkle.remove();
+                    if (sparkle.parentNode) sparkle.parentNode.removeChild(sparkle);
                 }, 1500);
             }
         }
         
-        // Create confetti explosion
+        // Create confetti explosion - optimized
         function createConfetti() {
-            const colors = ['#ff0000', '#ff7700', '#ffdd00', '#00ff00', '#0088ff', '#8800ff', '#ff00ff'];
+            const colors = ['#ff0000', '#ff7700', '#ffdd00', '#00ff00', '#0088ff'];
+            const maxConfetti = window.innerWidth < 768 ? 30 : 50;
             
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < maxConfetti; i++) {
                 const confetti = document.createElement('div');
                 confetti.classList.add('confetti');
                 confetti.style.left = Math.random() * 100 + 'vw';
                 confetti.style.top = -10 + 'px';
                 confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.width = Math.random() * 10 + 5 + 'px';
-                confetti.style.height = Math.random() * 10 + 5 + 'px';
+                confetti.style.width = Math.random() * 8 + 5 + 'px';
+                confetti.style.height = Math.random() * 8 + 5 + 'px';
                 confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
                 confetti.style.opacity = Math.random() * 0.7 + 0.3;
-                document.body.appendChild(confetti);
                 
-                // Animate confetti
-                const animationDuration = Math.random() * 3 + 2;
-                confetti.style.animation = `confettiFall ${animationDuration}s linear forwards`;
-                confetti.style.setProperty('--end-x', Math.random() * 200 - 100 + 'px');
-                confetti.style.setProperty('--end-rotate', Math.random() * 720 - 360 + 'deg');
+                // Set CSS variables with fewer calculations
+                confetti.style.setProperty('--end-x', Math.round(Math.random() * 200 - 100) + 'px');
+                confetti.style.setProperty('--end-rotate', Math.round(Math.random() * 360) + 'deg');
+                confetti.style.animation = `confettiFall ${Math.random() * 2 + 2}s linear forwards`;
+                
+                document.body.appendChild(confetti);
                 
                 // Remove confetti after animation
                 setTimeout(() => {
-                    confetti.remove();
-                }, animationDuration * 1000);
+                    if (confetti.parentNode) confetti.parentNode.removeChild(confetti);
+                }, 4000);
             }
-            
-            // Add confetti animation to styles
-            const style = document.createElement('style');
-            style.innerHTML = `
-                @keyframes confettiFall {
-                    0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
-                    100% { transform: translateY(100vh) translateX(var(--end-x)) rotate(var(--end-rotate)); opacity: 0; }
-                }
-            `;
-            document.head.appendChild(style);
         }
         
-        // Love button effect
+        // Love button effect - with debouncing
+        let buttonTimeout = null;
         document.getElementById('loveButton').addEventListener('click', function() {
+            if (buttonTimeout) return;
+            
             createConfetti();
             document.getElementById('envelope').classList.add('active');
             
-            // Play sound effect
-            const audio = new Audio('https://www.soundjay.com/buttons/sounds/button-09.mp3');
-            audio.play();
+            buttonTimeout = setTimeout(() => {
+                buttonTimeout = null;
+            }, 1000);
         });
         
         // Close envelope
@@ -748,14 +701,21 @@
             document.getElementById('envelope').classList.remove('active');
         });
         
-        // Click anywhere to create sparkles
+        // Click sparkle effect with debouncing
+        let clickTimeout = null;
         document.addEventListener('click', function(e) {
-            if (e.target.id !== 'loveButton' && e.target.id !== 'musicControl') {
+            if (clickTimeout) return;
+            
+            if (e.target.id !== 'loveButton' && e.target.id !== 'musicControl' && e.target.id !== 'closeEnvelope') {
                 createSparkles(e);
+                
+                clickTimeout = setTimeout(() => {
+                    clickTimeout = null;
+                }, 200);
             }
         });
         
-        // Music control
+        // Music control - optimized
         const musicControl = document.getElementById('musicControl');
         const bgMusic = document.getElementById('bgMusic');
         let musicPlaying = false;
@@ -771,7 +731,9 @@
                     </svg>
                 `;
             } else {
-                bgMusic.play();
+                // Load audio only when user interacts
+                bgMusic.load();
+                bgMusic.play().catch(e => console.log("Audio play failed: ", e));
                 musicControl.innerHTML = `
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
@@ -782,32 +744,43 @@
             musicPlaying = !musicPlaying;
         });
         
-        // Initialize
-        window.onload = function() {
+        // Initialize - with optimizations
+        window.addEventListener('load', function() {
+            // Create initial hearts
             createHearts();
             
-            // Create continuous floating hearts
-            setInterval(() => {
-                const hearts = document.querySelectorAll('.heart');
-                if (hearts.length < 50) {
-                    createHearts();
-                }
-            }, 2000);
+            // Create fewer hearts at longer intervals
+            setInterval(createHearts, 3000);
             
-            // Animate elements sequentially
+            // Don't animate the container continuously - too resource intensive
+            // Instead, just set the initial look
+            document.querySelector('.container').style.transform = 'translateY(0)';
+            
+            // Animate elements once on load rather than sequentially
             const elements = document.querySelectorAll('.animate__animated');
-            elements.forEach((el, index) => {
-                setTimeout(() => {
-                    el.style.opacity = 1;
-                }, index * 200);
+            elements.forEach(el => {
+                el.style.opacity = 1;
             });
             
-            // Gentle floating animation for container
-            setInterval(() => {
-                document.querySelector('.container').style.transform = 
-                    `translateY(${Math.sin(Date.now() / 1000) * 5}px) rotateX(${Math.sin(Date.now() / 1500) * 0.5}deg) rotateY(${Math.cos(Date.now() / 1500) * 0.5}deg)`;
-            }, 50);
-        };
+            // Add class for ribbon animation
+            document.querySelector('.ribbon-top-right span').style.animation = 'ribbonShake 2s infinite';
+        });
+        
+        // Add intersection observer for animations when elements are in view
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate__animated');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.photo-frame, .message-container, .signature').forEach(el => {
+                observer.observe(el);
+            });
+        }
     </script>
 </body>
 </html>
