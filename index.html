@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For My Beloved Mahal</title>
-    <!-- Preload critical fonts -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap" as="style">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap">
-    <!-- Load animate.css only when needed -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" media="print" onload="this.media='all'">
     <style>
         :root {
@@ -407,14 +405,23 @@
         }
 
         .close-envelope {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: none;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
             border: none;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 50px;
             cursor: pointer;
-            color: var(--primary-color);
+            margin: 20px auto 0;
+            display: block;
+            box-shadow: 0 5px 15px rgba(193, 122, 116, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .close-envelope:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(193, 122, 116, 0.4);
         }
 
         .music-control {
@@ -479,6 +486,12 @@
             .btn-love {
                 padding: 15px 25px;
                 font-size: 1.1rem;
+            }
+            
+            .envelope-content {
+                padding: 30px 20px;
+                width: 85%;
+                max-width: 85%;
             }
         }
 
@@ -585,7 +598,6 @@
     
     <div class="envelope" id="envelope">
         <div class="envelope-content">
-            <button class="close-envelope" id="closeEnvelope">×</button>
             <h2 style="color: var(--primary-color); font-family: 'Dancing Script', cursive; margin-bottom: 20px;">A Special Message Just For You</h2>
             <p style="font-size: 1.2rem; line-height: 1.8;">
                 My dearest Mahal,<br><br>
@@ -597,20 +609,18 @@
             <div style="margin-top: 30px; font-family: 'Dancing Script', cursive; font-size: 2rem; color: var(--primary-color);">
                 Always and forever,<br>Da!
             </div>
+            <button class="close-envelope" id="closeEnvelope">Close</button>
         </div>
     </div>
 
-    <!-- Audio preload -->
     <audio id="bgMusic" preload="metadata" loop>
         <source src="lover.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        // Use a limited number of hearts for better performance
         const MAX_HEARTS = 20;
         const MAX_SPARKLES = 10;
         
-        // Create floating hearts - optimized
         function createHearts() {
             const container = document.getElementById('heartsContainer');
             const heartCount = Math.min(15, MAX_HEARTS - container.children.length);
@@ -626,14 +636,12 @@
                 heart.style.animation = `float ${Math.random() * 5 + 5}s ease-in-out forwards`;
                 container.appendChild(heart);
                 
-                // Clean up hearts after animation
                 setTimeout(() => {
                     if (heart.parentNode) heart.parentNode.removeChild(heart);
                 }, 10000);
             }
         }
         
-        // Create sparkles on click - optimized
         function createSparkles(e) {
             const sparkleCount = Math.min(8, MAX_SPARKLES);
             
@@ -646,14 +654,12 @@
                 sparkle.style.backgroundColor = `hsl(${Math.random() * 60 + 30}, 100%, 50%)`;
                 document.body.appendChild(sparkle);
                 
-                // Remove sparkle after animation
                 setTimeout(() => {
                     if (sparkle.parentNode) sparkle.parentNode.removeChild(sparkle);
                 }, 1500);
             }
         }
         
-        // Create confetti explosion - optimized
         function createConfetti() {
             const colors = ['#ff0000', '#ff7700', '#ffdd00', '#00ff00', '#0088ff'];
             const maxConfetti = window.innerWidth < 768 ? 30 : 50;
@@ -669,21 +675,18 @@
                 confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
                 confetti.style.opacity = Math.random() * 0.7 + 0.3;
                 
-                // Set CSS variables with fewer calculations
                 confetti.style.setProperty('--end-x', Math.round(Math.random() * 200 - 100) + 'px');
                 confetti.style.setProperty('--end-rotate', Math.round(Math.random() * 360) + 'deg');
                 confetti.style.animation = `confettiFall ${Math.random() * 2 + 2}s linear forwards`;
                 
                 document.body.appendChild(confetti);
                 
-                // Remove confetti after animation
                 setTimeout(() => {
                     if (confetti.parentNode) confetti.parentNode.removeChild(confetti);
                 }, 4000);
             }
         }
         
-        // Love button effect - with debouncing
         let buttonTimeout = null;
         document.getElementById('loveButton').addEventListener('click', function() {
             if (buttonTimeout) return;
@@ -696,12 +699,10 @@
             }, 1000);
         });
         
-        // Close envelope
         document.getElementById('closeEnvelope').addEventListener('click', function() {
             document.getElementById('envelope').classList.remove('active');
         });
         
-        // Click sparkle effect with debouncing
         let clickTimeout = null;
         document.addEventListener('click', function(e) {
             if (clickTimeout) return;
@@ -715,7 +716,6 @@
             }
         });
         
-        // Music control - optimized
         const musicControl = document.getElementById('musicControl');
         const bgMusic = document.getElementById('bgMusic');
         let musicPlaying = false;
@@ -731,7 +731,6 @@
                     </svg>
                 `;
             } else {
-                // Load audio only when user interacts
                 bgMusic.load();
                 bgMusic.play().catch(e => console.log("Audio play failed: ", e));
                 musicControl.innerHTML = `
@@ -744,29 +743,21 @@
             musicPlaying = !musicPlaying;
         });
         
-        // Initialize - with optimizations
         window.addEventListener('load', function() {
-            // Create initial hearts
             createHearts();
             
-            // Create fewer hearts at longer intervals
             setInterval(createHearts, 3000);
             
-            // Don't animate the container continuously - too resource intensive
-            // Instead, just set the initial look
             document.querySelector('.container').style.transform = 'translateY(0)';
             
-            // Animate elements once on load rather than sequentially
             const elements = document.querySelectorAll('.animate__animated');
             elements.forEach(el => {
                 el.style.opacity = 1;
             });
             
-            // Add class for ribbon animation
             document.querySelector('.ribbon-top-right span').style.animation = 'ribbonShake 2s infinite';
         });
         
-        // Add intersection observer for animations when elements are in view
         if ('IntersectionObserver' in window) {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
