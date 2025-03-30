@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Beloved Mahal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f8f6e9;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #5a4a3a;
+            text-align: center;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle, rgba(248,246,233,0.8) 0%, rgba(220,210,190,0.6) 100%);
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%23e8a0a0" opacity="0.2" d="M30,50 Q50,30 70,50 Q50,70 30,50 Z"/></svg>');
+            background-size: 100px;
+            opacity: 0.3;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 900px;
+            padding: 50px;
+            background: linear-gradient(145deg, rgba(255,253,245,0.95) 0%, rgba(255,250,240,0.98) 100%);
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15), 
+                        0 0 0 15px rgba(248, 246, 233, 0.5),
+                        0 0 0 25px rgba(220, 210, 190, 0.3);
+            border: 1px solid #e8e4d5;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+
+        .container::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px dashed rgba(193, 122, 116, 0.3);
+            border-radius: 35px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        h1 {
+            color: #c17a74;
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            margin-bottom: 40px;
+            text-shadow: 3px 3px 5px rgba(0,0,0,0.1);
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #c17a74, transparent);
+        }
+
+        .message-container {
+            position: relative;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 15px;
+            margin: 40px 0;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.05);
+            border: 1px solid rgba(193, 122, 116, 0.2);
+        }
+
+        .message {
+            font-size: 1.5rem;
+            line-height: 2;
+            margin-bottom: 30px;
+            white-space: pre-line;
+            position: relative;
+            z-index: 2;
+        }
+
+        .photo-frame {
+            width: 350px;
+            height: 350px;
+            margin: 0 auto 40px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            border: 10px solid white;
+            position: relative;
+            transform: rotate(-2deg);
+            transition: transform 0.3s ease;
+        }
+
+        .photo-frame:hover {
+            transform: rotate(0deg) scale(1.03);
+        }
+
+        .photo-frame::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(248,246,233,0.1) 0%, rgba(193,122,116,0.1) 100%);
+            z-index: 1;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .photo-frame:hover img {
+            transform: scale(1.05);
+        }
+
+        .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #c17a74;
+            margin-top: 40px;
+            text-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+        }
+
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            color: #e8a0a0;
+            font-size: 1.5rem;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: #ffd700;
+            border-radius: 50%;
+            animation: sparkle 2s ease-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes sparkle {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+
+        .ribbon {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        .ribbon-top-right {
+            top: 0;
+            right: 0;
+        }
+
+        .ribbon-top-right::before,
+        .ribbon-top-right::after {
+            content: '';
+            position: absolute;
+            z-index: -1;
+            display: block;
+            border: 5px solid #c17a74;
+            border-top-color: transparent;
+            border-right-color: transparent;
+        }
+
+        .ribbon-top-right::before {
+            top: 0;
+            left: 0;
+        }
+
+        .ribbon-top-right::after {
+            bottom: 0;
+            right: 0;
+        }
+
+        .ribbon-top-right span {
+            position: absolute;
+            display: block;
+            width: 225px;
+            padding: 15px 0;
+            background-color: #c17a74;
+            box-shadow: 0 5px 10px rgba(0,0,0,.1);
+            color: #fff;
+            font-size: 1rem;
+            text-transform: uppercase;
+            text-align: center;
+            right: -25px;
+            top: 30px;
+            transform: rotate(45deg);
+            font-weight: bold;
+        }
+
+        .btn-love {
+            background: linear-gradient(45deg, #c17a74, #e8a0a0);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 30px;
+            box-shadow: 0 10px 20px rgba(193, 122, 116, 0.3);
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-love:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(193, 122, 116, 0.4);
+        }
+
+        .btn-love:active {
+            transform: translateY(1px);
+        }
+
+        .btn-love::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+
+        .btn-love:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px;
+                width: 90%;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .photo-frame {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .message {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="ribbon ribbon-top-right">
+            <span>Special Birthday</span>
+        </div>
+        
+        <h1>Happy Birthday, Mahal!</h1>
+        
+        <div class="photo-frame">
+            <img src="USS.jpg" alt="Our Beautiful Memory">
+        </div>
+        
+        <div class="message-container">
+            <div class="message">
+Hi, Mahal! You thought I was done with my greetings? OF COURSE NOT! I told you diba? I was just looking for a picture of us, my love. I love you so so so much. Thank you for making me happy and for coming back into my life. This time, I'll love you even better, treat you even better than before. You are my one and only, always. Happy birthday again, ma!
+            </div>
+        </div>
+        
+        <button class="btn-love" id="loveButton">Send My Love</button>
+        
+        <div class="signature">
+            Forever yours,<br>
+            LSM
+        </div>
+        
+        <div class="floating-hearts" id="heartsContainer"></div>
+    </div>
+
+    <script>
+        // Create floating hearts
+        function createHearts() {
+            const container = document.getElementById('heartsContainer');
+            const heartCount = 20;
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * 100 + 'vh';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                heart.style.animationDuration = (Math.random() * 10 + 5) + 's';
+                heart.style.animationDelay = (Math.random() * 5) + 's';
+                container.appendChild(heart);
+            }
+        }
+        
+        // Create sparkles on click
+        function createSparkles(e) {
+            for (let i = 0; i < 10; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                sparkle.style.left = e.clientX + 'px';
+                sparkle.style.top = e.clientY + 'px';
+                sparkle.style.animationDelay = (i * 0.1) + 's';
+                document.body.appendChild(sparkle);
+                
+                // Remove sparkle after animation
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 2000);
+            }
+        }
+        
+        // Love button effect
+        document.getElementById('loveButton').addEventListener('click', function() {
+            alert("I love you more than words can express, Mahal! ❤️");
+            createSparkles({clientX: window.innerWidth/2, clientY: window.innerHeight/2});
+        });
+        
+        // Click anywhere to create sparkles
+        document.addEventListener('click', createSparkles);
+        
+        // Initialize
+        window.onload = function() {
+            createHearts();
+            
+            // Create continuous floating hearts
+            setInterval(() => {
+                const hearts = document.querySelectorAll('.heart');
+                if (hearts.length < 30) {
+                    createHearts();
+                }
+            }, 3000);
+        };
+    </script>
+</body>
+</html>
