@@ -5,20 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For My Beloved Mahal</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
+        :root {
+            --primary-color: #c17a74;
+            --secondary-color: #e8a0a0;
+            --accent-color: #ffd700;
+            --text-color: #5a4a3a;
+            --bg-color: #f8f6e9;
+        }
+        
         body {
             margin: 0;
             padding: 0;
-            background-color: #f8f6e9;
+            background-color: var(--bg-color);
             font-family: 'Montserrat', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            color: #5a4a3a;
+            color: var(--text-color);
             text-align: center;
             overflow-x: hidden;
-            background-image: radial-gradient(circle, rgba(248,246,233,0.8) 0%, rgba(220,210,190,0.6) 100%);
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(248,246,233,0.9) 0%, rgba(220,210,190,0.7) 100%),
+                linear-gradient(135deg, rgba(255,245,240,0.8) 0%, rgba(255,240,245,0.8) 100%);
             position: relative;
         }
 
@@ -29,11 +40,20 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%23e8a0a0" opacity="0.2" d="M30,50 Q50,30 70,50 Q50,70 30,50 Z"/></svg>');
-            background-size: 100px;
+            background-image: 
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%23e8a0a0" opacity="0.2" d="M30,50 Q50,30 70,50 Q50,70 30,50 Z"/></svg>'),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><path fill="%23c17a74" opacity="0.15" d="M20,30 Q30,20 40,30 Q30,40 20,30 Z"/></svg>');
+            background-size: 100px, 60px;
+            background-position: 0 0, 50px 50px;
             opacity: 0.3;
             z-index: -1;
             pointer-events: none;
+            animation: bgMove 100s linear infinite;
+        }
+
+        @keyframes bgMove {
+            0% { background-position: 0 0, 50px 50px; }
+            100% { background-position: 1000px 1000px, 1050px 1050px; }
         }
 
         .container {
@@ -41,14 +61,26 @@
             padding: 50px;
             background: linear-gradient(145deg, rgba(255,253,245,0.95) 0%, rgba(255,250,240,0.98) 100%);
             border-radius: 25px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15), 
-                        0 0 0 15px rgba(248, 246, 233, 0.5),
-                        0 0 0 25px rgba(220, 210, 190, 0.3);
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.15), 
+                0 0 0 15px rgba(248, 246, 233, 0.5),
+                0 0 0 25px rgba(220, 210, 190, 0.3),
+                inset 0 0 50px rgba(255, 255, 255, 0.8);
             border: 1px solid #e8e4d5;
             position: relative;
             overflow: hidden;
             transform-style: preserve-3d;
             transition: transform 0.5s ease;
+            backdrop-filter: blur(2px);
+        }
+
+        .container:hover {
+            transform: translateY(-5px) rotateX(1deg) rotateY(1deg);
+            box-shadow: 
+                0 25px 60px rgba(0, 0, 0, 0.2), 
+                0 0 0 15px rgba(248, 246, 233, 0.5),
+                0 0 0 25px rgba(220, 210, 190, 0.3),
+                inset 0 0 80px rgba(255, 220, 220, 0.6);
         }
 
         .container::before {
@@ -64,14 +96,43 @@
             z-index: -1;
         }
 
+        .container::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, transparent 10%, rgba(255,255,255,0.3) 20%, transparent 30%),
+                radial-gradient(circle at 80% 70%, transparent 10%, rgba(255,255,255,0.3) 20%, transparent 30%);
+            background-size: 300% 300%;
+            animation: shimmer 15s infinite linear;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+
         h1 {
-            color: #c17a74;
+            color: var(--primary-color);
             font-family: 'Dancing Script', cursive;
-            font-size: 4rem;
+            font-size: 4.5rem;
             margin-bottom: 40px;
-            text-shadow: 3px 3px 5px rgba(0,0,0,0.1);
+            text-shadow: 
+                3px 3px 5px rgba(0,0,0,0.1),
+                0 0 10px rgba(200, 120, 120, 0.3);
             position: relative;
             display: inline-block;
+            animation: pulse 2s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
         }
 
         h1::after {
@@ -82,7 +143,13 @@
             transform: translateX(-50%);
             width: 150px;
             height: 3px;
-            background: linear-gradient(90deg, transparent, #c17a74, transparent);
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            animation: linePulse 3s infinite;
+        }
+
+        @keyframes linePulse {
+            0%, 100% { width: 150px; }
+            50% { width: 200px; }
         }
 
         .message-container {
@@ -91,8 +158,31 @@
             background-color: rgba(255, 255, 255, 0.7);
             border-radius: 15px;
             margin: 40px 0;
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.05);
+            box-shadow: 
+                inset 0 0 15px rgba(0,0,0,0.05),
+                0 5px 15px rgba(0,0,0,0.05);
             border: 1px solid rgba(193, 122, 116, 0.2);
+            transition: all 0.5s ease;
+            overflow: hidden;
+        }
+
+        .message-container:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                inset 0 0 20px rgba(193, 122, 116, 0.1),
+                0 8px 25px rgba(0,0,0,0.1);
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .message-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--primary-color));
+            opacity: 0.3;
         }
 
         .message {
@@ -102,6 +192,17 @@
             white-space: pre-line;
             position: relative;
             z-index: 2;
+            text-align: justify;
+            font-weight: 500;
+        }
+
+        .message::first-letter {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            font-family: 'Dancing Script', cursive;
+            float: left;
+            margin-right: 5px;
+            line-height: 1;
         }
 
         .photo-frame {
@@ -110,15 +211,22 @@
             margin: 0 auto 40px;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-            border: 10px solid white;
+            box-shadow: 
+                0 15px 40px rgba(0,0,0,0.2),
+                0 0 0 10px white,
+                0 0 0 12px rgba(193, 122, 116, 0.3);
             position: relative;
             transform: rotate(-2deg);
-            transition: transform 0.3s ease;
+            transition: all 0.5s ease;
+            z-index: 1;
         }
 
         .photo-frame:hover {
-            transform: rotate(0deg) scale(1.03);
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 
+                0 20px 50px rgba(0,0,0,0.3),
+                0 0 0 10px white,
+                0 0 0 12px rgba(193, 122, 116, 0.5);
         }
 
         .photo-frame::before {
@@ -132,23 +240,66 @@
             z-index: 1;
         }
 
+        .photo-frame::after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 20px;
+            background: rgba(0,0,0,0.1);
+            filter: blur(10px);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .photo-frame:hover::after {
+            opacity: 0.6;
+        }
+
         .photo-frame img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: all 0.5s ease;
         }
 
         .photo-frame:hover img {
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
 
         .signature {
             font-family: 'Dancing Script', cursive;
-            font-size: 2.5rem;
-            color: #c17a74;
+            font-size: 2.8rem;
+            color: var(--primary-color);
             margin-top: 40px;
             text-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+            position: relative;
+            display: inline-block;
+        }
+
+        .signature::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: -40px;
+            width: 30px;
+            height: 2px;
+            background: var(--primary-color);
+            opacity: 0.5;
+        }
+
+        .signature::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: -40px;
+            width: 30px;
+            height: 2px;
+            background: var(--primary-color);
+            opacity: 0.5;
         }
 
         .floating-hearts {
@@ -164,31 +315,35 @@
 
         .heart {
             position: absolute;
-            color: #e8a0a0;
+            color: var(--secondary-color);
             font-size: 1.5rem;
             animation: float 6s ease-in-out infinite;
-            opacity: 0.6;
+            opacity: 0;
+            filter: drop-shadow(0 0 5px rgba(200, 100, 100, 0.5));
         }
 
         @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.6; }
-            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
         }
 
         .sparkle {
             position: absolute;
-            width: 5px;
-            height: 5px;
-            background-color: #ffd700;
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-color);
             border-radius: 50%;
-            animation: sparkle 2s ease-out infinite;
+            animation: sparkle 1.5s ease-out infinite;
             pointer-events: none;
+            filter: drop-shadow(0 0 3px gold);
         }
 
         @keyframes sparkle {
             0% { transform: scale(0); opacity: 1; }
-            100% { transform: scale(3); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: scale(5); opacity: 0; }
         }
 
         .ribbon {
@@ -210,7 +365,7 @@
             position: absolute;
             z-index: -1;
             display: block;
-            border: 5px solid #c17a74;
+            border: 5px solid var(--primary-color);
             border-top-color: transparent;
             border-right-color: transparent;
         }
@@ -230,9 +385,9 @@
             display: block;
             width: 225px;
             padding: 15px 0;
-            background-color: #c17a74;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
             box-shadow: 0 5px 10px rgba(0,0,0,.1);
-            color: #fff;
+            color: white;
             font-size: 1rem;
             text-transform: uppercase;
             text-align: center;
@@ -240,18 +395,27 @@
             top: 30px;
             transform: rotate(45deg);
             font-weight: bold;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            animation: ribbonShake 2s infinite;
+        }
+
+        @keyframes ribbonShake {
+            0%, 100% { transform: rotate(45deg) translateX(0); }
+            50% { transform: rotate(45deg) translateX(5px); }
         }
 
         .btn-love {
-            background: linear-gradient(45deg, #c17a74, #e8a0a0);
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
             border: none;
             color: white;
-            padding: 15px 30px;
-            font-size: 1.2rem;
+            padding: 18px 35px;
+            font-size: 1.3rem;
             border-radius: 50px;
             cursor: pointer;
             margin-top: 30px;
-            box-shadow: 0 10px 20px rgba(193, 122, 116, 0.3);
+            box-shadow: 
+                0 10px 20px rgba(193, 122, 116, 0.3),
+                0 0 0 3px rgba(255, 255, 255, 0.5);
             transition: all 0.3s ease;
             font-family: 'Montserrat', sans-serif;
             font-weight: 600;
@@ -259,15 +423,34 @@
             letter-spacing: 1px;
             position: relative;
             overflow: hidden;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
 
         .btn-love:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 25px rgba(193, 122, 116, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 
+                0 15px 25px rgba(193, 122, 116, 0.4),
+                0 0 0 3px rgba(255, 255, 255, 0.7);
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
         }
 
         .btn-love:active {
             transform: translateY(1px);
+        }
+
+        .btn-love::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-love:hover::before {
+            left: 100%;
         }
 
         .btn-love::after {
@@ -299,6 +482,87 @@
             }
         }
 
+        .envelope {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0,0,0,0.7);
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .envelope.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .envelope-content {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            max-width: 500px;
+            position: relative;
+            transform: scale(0.5);
+            transition: transform 0.5s ease;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .envelope.active .envelope-content {
+            transform: scale(1);
+        }
+
+        .close-envelope {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }p{
+            text-align: justify!important;
+        }
+
+        .music-control:hover {
+            transform: scale(1.1);
+            background: var(--secondary-color);
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--accent-color);
+            opacity: 0;
+            z-index: 100;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 30px;
@@ -306,61 +570,106 @@
             }
             
             h1 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
             }
             
             .photo-frame {
                 width: 250px;
                 height: 250px;
             }
-            
+
             .message {
                 font-size: 1.2rem;
+            }
+            
+            .btn-love {
+                padding: 15px 25px;
+                font-size: 1.1rem;
             }
         }
     </style>
 </head>
 <body>
+    <div class="music-control" id="musicControl">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 18V5l12-2v13"></path>
+            <circle cx="6" cy="18" r="3"></circle>
+            <circle cx="18" cy="16" r="3"></circle>
+        </svg>
+    </div>
+    
     <div class="container">
         <div class="ribbon ribbon-top-right">
             <span>Special Birthday</span>
         </div>
         
-        <h1>Happy Birthday, Mahal!</h1>
+        <h1 class="animate__animated animate__fadeInDown">Happy Birthday, Mahal!</h1>
         
         <div class="photo-frame">
             <img src="USS.jpg" alt="Our Beautiful Memory">
         </div>
         
-        <div class="message-container">
+        <div class="message-container animate__animated animate__fadeInUp">
             <div class="message">
-Hi, Mahal! You thought I was done with my greetings? OF COURSE NOT! I told you diba? I was just waiting for a picture of us, my love. I love you so so so much. Thank you for making me happy and for coming back into my life. This time, I'll love you even better, treat you even better than before. You are my one and only, always. Happy birthday again, ma!
+                Hi, Mahal!
+
+                You really thought I was done with my greetings? OF COURSE NOT! You know me, oa.I could never run out of words when it comes to you. I told you, I was just waiting of us because every moment with you is special, and I always want to look back at them and kikiligin hehe.
+                
+                Mahal, I love you so, so, so much. More than words can ever explain, more than my heart can hold. Every single day, I thank God for you, for giving me another chance to love you, to make you happy, to hold you close. You are the best thing that ever happened to me, and I promise to never take you for granted again.
+                
+                This time, I'll love you better. I'll hold you tighter, cherish you more, and remind you every day how much you mean to me. You are my home, my peace, my greatest happiness. No one else, nothing else, only you. Always you. Forever you.
+                
+                Happy, happy birthday again, my love! I hope this day brings you as much happiness as you bring into my life. You deserve all the love, all the joy, all the best things in this world. And I will spend my life making sure you feel that every single day.
+                
+                Mahal na mahal kita. Sobra. Walang bawas, walang kulang. Ikaw lang, ngayon at habang buhay.
             </div>
         </div>
         
-        <button class="btn-love" id="loveButton">Send My Love</button>
+        <button class="btn-love animate__animated animate__pulse animate__infinite" id="loveButton">Send My Love</button>
         
-        <div class="signature">
+        <div class="signature animate__animated animate__fadeIn">
             Forever yours,<br>
-            LSM
+            Da!
         </div>
         
         <div class="floating-hearts" id="heartsContainer"></div>
     </div>
+    
+    <div class="envelope" id="envelope">
+        <div class="envelope-content">
+            <button class="close-envelope" id="closeEnvelope">×</button>
+            <h2 style="color: var(--primary-color); font-family: 'Dancing Script', cursive; margin-bottom: 20px;">A Special Message Just For You</h2>
+            <p style="font-size: 1.2rem; line-height: 1.8;">
+                My dearest Mahal,<br><br>
+                On this special day, I want you to know that you are the most precious person in my life. 
+                Every moment with you is a gift I cherish deeply. I love you more than words can express, 
+                more than the stars in the sky, more than life itself.<br><br>
+                Happy Birthday, my love. May this year bring you all the happiness you deserve.
+            </p>
+            <div style="margin-top: 30px; font-family: 'Dancing Script', cursive; font-size: 2rem; color: var(--primary-color);">
+                Always and forever,<br>Da!
+            </div>
+        </div>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="lover.mp3" type="audio/mpeg">
+    </audio>
 
     <script>
         // Create floating hearts
         function createHearts() {
             const container = document.getElementById('heartsContainer');
-            const heartCount = 20;
+            const heartCount = 30;
+            const heartTypes = ['❤', '🧡', '💛', '💚', '💙', '💜', '🤎', '🖤', '🤍'];
             
             for (let i = 0; i < heartCount; i++) {
                 const heart = document.createElement('div');
                 heart.classList.add('heart');
-                heart.innerHTML = '❤';
+                heart.innerHTML = heartTypes[Math.floor(Math.random() * heartTypes.length)];
                 heart.style.left = Math.random() * 100 + 'vw';
                 heart.style.top = Math.random() * 100 + 'vh';
-                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                heart.style.fontSize = (Math.random() * 25 + 15) + 'px';
                 heart.style.animationDuration = (Math.random() * 10 + 5) + 's';
                 heart.style.animationDelay = (Math.random() * 5) + 's';
                 container.appendChild(heart);
@@ -369,29 +678,109 @@ Hi, Mahal! You thought I was done with my greetings? OF COURSE NOT! I told you d
         
         // Create sparkles on click
         function createSparkles(e) {
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < 15; i++) {
                 const sparkle = document.createElement('div');
                 sparkle.classList.add('sparkle');
-                sparkle.style.left = e.clientX + 'px';
-                sparkle.style.top = e.clientY + 'px';
+                sparkle.style.left = e.clientX + (Math.random() * 40 - 20) + 'px';
+                sparkle.style.top = e.clientY + (Math.random() * 40 - 20) + 'px';
                 sparkle.style.animationDelay = (i * 0.1) + 's';
+                sparkle.style.backgroundColor = `hsl(${Math.random() * 60 + 30}, 100%, 50%)`;
                 document.body.appendChild(sparkle);
                 
                 // Remove sparkle after animation
                 setTimeout(() => {
                     sparkle.remove();
-                }, 2000);
+                }, 1500);
             }
+        }
+        
+        // Create confetti explosion
+        function createConfetti() {
+            const colors = ['#ff0000', '#ff7700', '#ffdd00', '#00ff00', '#0088ff', '#8800ff', '#ff00ff'];
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = -10 + 'px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = Math.random() * 10 + 5 + 'px';
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                confetti.style.opacity = Math.random() * 0.7 + 0.3;
+                document.body.appendChild(confetti);
+                
+                // Animate confetti
+                const animationDuration = Math.random() * 3 + 2;
+                confetti.style.animation = `confettiFall ${animationDuration}s linear forwards`;
+                confetti.style.setProperty('--end-x', Math.random() * 200 - 100 + 'px');
+                confetti.style.setProperty('--end-rotate', Math.random() * 720 - 360 + 'deg');
+                
+                // Remove confetti after animation
+                setTimeout(() => {
+                    confetti.remove();
+                }, animationDuration * 1000);
+            }
+            
+            // Add confetti animation to styles
+            const style = document.createElement('style');
+            style.innerHTML = `
+                @keyframes confettiFall {
+                    0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
+                    100% { transform: translateY(100vh) translateX(var(--end-x)) rotate(var(--end-rotate)); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
         }
         
         // Love button effect
         document.getElementById('loveButton').addEventListener('click', function() {
-            alert("I love you more than words can express, Mahal! ❤️");
-            createSparkles({clientX: window.innerWidth/2, clientY: window.innerHeight/2});
+            createConfetti();
+            document.getElementById('envelope').classList.add('active');
+            
+            // Play sound effect
+            const audio = new Audio('https://www.soundjay.com/buttons/sounds/button-09.mp3');
+            audio.play();
+        });
+        
+        // Close envelope
+        document.getElementById('closeEnvelope').addEventListener('click', function() {
+            document.getElementById('envelope').classList.remove('active');
         });
         
         // Click anywhere to create sparkles
-        document.addEventListener('click', createSparkles);
+        document.addEventListener('click', function(e) {
+            if (e.target.id !== 'loveButton' && e.target.id !== 'musicControl') {
+                createSparkles(e);
+            }
+        });
+        
+        // Music control
+        const musicControl = document.getElementById('musicControl');
+        const bgMusic = document.getElementById('bgMusic');
+        let musicPlaying = false;
+        
+        musicControl.addEventListener('click', function() {
+            if (musicPlaying) {
+                bgMusic.pause();
+                musicControl.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 18V5l12-2v13"></path>
+                        <circle cx="6" cy="18" r="3"></circle>
+                        <circle cx="18" cy="16" r="3"></circle>
+                    </svg>
+                `;
+            } else {
+                bgMusic.play();
+                musicControl.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <line x1="15" y1="12" x2="23" y2="12"></line>
+                    </svg>
+                `;
+            }
+            musicPlaying = !musicPlaying;
+        });
         
         // Initialize
         window.onload = function() {
@@ -400,10 +789,24 @@ Hi, Mahal! You thought I was done with my greetings? OF COURSE NOT! I told you d
             // Create continuous floating hearts
             setInterval(() => {
                 const hearts = document.querySelectorAll('.heart');
-                if (hearts.length < 30) {
+                if (hearts.length < 50) {
                     createHearts();
                 }
-            }, 3000);
+            }, 2000);
+            
+            // Animate elements sequentially
+            const elements = document.querySelectorAll('.animate__animated');
+            elements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.opacity = 1;
+                }, index * 200);
+            });
+            
+            // Gentle floating animation for container
+            setInterval(() => {
+                document.querySelector('.container').style.transform = 
+                    `translateY(${Math.sin(Date.now() / 1000) * 5}px) rotateX(${Math.sin(Date.now() / 1500) * 0.5}deg) rotateY(${Math.cos(Date.now() / 1500) * 0.5}deg)`;
+            }, 50);
         };
     </script>
 </body>
